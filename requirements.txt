@@ -1,3 +1,8 @@
+# API Server
+fastapi
+uvicorn
+pydantic
+
 # Core LangChain + LangGraph
 langchain
 langchain-core
