@@ -1,0 +1,26 @@
+# Core LangChain + LangGraph
+langchain
+langchain-core
+langchain-community
+langchain-groq
+langgraph
+
+# Vector store
+chromadb
+
+# Embeddings + NLI model
+transformers
+sentence-transformers
+# torch removed here to be installed separately in Dockerfile with CPU-only index
+
+# Web search
+google-search-results
+
+# Wikipedia
+wikipedia
+
+# Streamlit UI
+streamlit
+
+# Utilities
+python-dotenv

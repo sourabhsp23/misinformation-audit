@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuralAudit | High-Fidelity Claim Verification</title>
+    <!-- GSAP core & Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1", // Indigo
+                        secondary: "#06b6d4", // Cyan
+                        surface: "#f8fafc",
+                        card: "rgba(255, 255, 255, 0.8)",
+                        text: "#1e293b"
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="bg-[#f0f2f5] text-slate-800 overflow-x-hidden antialiased font-sans min-h-screen">
+
+    <!-- Decorative Animated Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="relative z-10 container mx-auto px-4 md:px-6 py-8 md:py-12 max-w-6xl">
+        
+        <!-- Premium Header -->
+        <header class="text-center mb-12 header-anim opacity-0">
+            <div class="flex flex-col items-center">
+                <div class="logo-box mb-4">
+                    <div class="logo-orb"></div>
+                    <svg class="w-10 h-10 text-indigo-600 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-2">NeuralAudit<span class="text-indigo-600">.ai</span></h1>
+                <p class="text-slate-500 font-medium tracking-wide type-subtitle">AI-POWERED TRUTH ENGINE</p>
+            </div>
+        </header>
+
+        <!-- Input Section -->
+        <section id="input-section" class="input-card opacity-0 translate-y-12">
+            <div class="glass-card p-1 md:p-8 rounded-3xl shadow-2xl border border-white/50">
+                <div class="flex flex-col gap-6">
+                    <div class="relative">
+                        <textarea id="article-input" rows="7" 
+                            class="w-full bg-white/50 backdrop-blur-sm text-slate-800 placeholder-slate-400 rounded-2xl p-6 border border-slate-200 focus:border-indigo-400 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all resize-none text-lg shadow-inner" 
+                            placeholder="Paste your article here for deep claim verification..."></textarea>
+                        <div class="absolute bottom-4 right-6 text-slate-300 text-sm font-mono pointer-events-none">NEURAL INPUT READY</div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <div class="relative w-full md:w-2/3">
+                            <input type="text" id="url-input" 
+                                class="w-full bg-white/50 backdrop-blur-sm text-slate-800 placeholder-slate-400 rounded-xl p-4 border border-slate-200 focus:border-indigo-400 focus:outline-none transition-all shadow-sm" 
+                                placeholder="Source URL (Optional)">
+                        </div>
+                        <button id="audit-btn" class="w-full md:w-1/3 audit-button-3d group">
+                            <span class="btn-front">
+                                <span class="flex items-center justify-center gap-3">
+                                    <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                    EXECUTE AUDIT
+                                </span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Process Map (Neural Steps) -->
+        <section id="progress-section" class="hidden flex-col items-center py-12">
+            <div class="w-full max-w-4xl">
+                <div class="neural-map flex flex-wrap justify-between items-center gap-4 relative mb-16">
+                    <div class="neural-line absolute top-1/2 left-0 w-full h-1 bg-slate-200 -translate-y-1/2 -z-10"></div>
+                    <div class="neural-line-progress absolute top-1/2 left-0 w-0 h-1 bg-indigo-500 -translate-y-1/2 -z-10 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+                    
+                    <div class="neural-step" data-step="claim_extractor">
+                        <div class="step-icon"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></div>
+                        <span>EXTRACT</span>
+                    </div>
+                    <div class="neural-step" data-step="rag_retriever">
+                        <div class="step-icon"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></div>
+                        <span>CORPUS</span>
+                    </div>
+                    <div class="neural-step" data-step="web_search">
+                        <div class="step-icon"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9-3-9m-9 9a9 9 0 019-9"></path></svg></div>
+                        <span>WEB</span>
+                    </div>
+                    <div class="neural-step" data-step="nli_verifier">
+                        <div class="step-icon"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <span>VERIFY</span>
+                    </div>
+                    <div class="neural-step" data-step="report_writer">
+                        <div class="step-icon"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <span>SYNTHESIS</span>
+                    </div>
+                </div>
+
+                <div class="status-panel glass-card p-8 rounded-3xl text-center shadow-xl border border-white">
+                    <div id="status-text" class="text-2xl font-bold text-slate-800 mb-2">Initializing Neural Link...</div>
+                    <div id="progress-text" class="text-indigo-600 font-mono font-bold mb-6">0% COMPLETE</div>
+                    <div class="flex justify-center">
+                        <div class="pulse-loader">
+                            <div class="pulse-ring"></div>
+                            <div class="pulse-ring"></div>
+                            <div class="pulse-ring"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- High-Fidelity Results -->
+        <section id="results-section" class="hidden">
+            <!-- Score Card -->
+            <div id="score-banner" class="glass-card p-10 rounded-[2.5rem] shadow-2xl border border-white relative overflow-hidden mb-12">
+                <div class="absolute -right-20 -top-20 w-80 h-80 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
+                
+                <div class="flex flex-col md:flex-row items-center justify-between gap-10 relative z-10">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-slate-400 font-bold uppercase tracking-[0.2em] text-sm mb-4">Credibility Index</h2>
+                        <div id="score-label" class="text-4xl md:text-5xl font-black mb-2 uppercase tracking-tight">ANALYSIS COMPLETE</div>
+                        <p class="text-slate-500 max-w-md">Our neural agents have cross-referenced claims against multiple authoritative databases and live web sources.</p>
+                    </div>
+
+                    <div class="relative w-48 h-48 flex items-center justify-center">
+                        <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                            <circle class="text-slate-100" stroke-width="8" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50"></circle>
+                            <circle id="score-circle" class="text-indigo-600 transition-all duration-1000 ease-out" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <div id="final-score" class="text-5xl font-black text-slate-900">0.0</div>
+                            <div class="text-slate-400 font-bold text-xs">SCORE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Claims Feed -->
+            <div class="mb-12">
+                <div class="flex items-center justify-between mb-8">
+                    <h3 class="text-2xl font-black text-slate-900 flex items-center gap-3">
+                        <span class="w-2 h-8 bg-indigo-600 rounded-full"></span>
+                        Neural Analysis Feed
+                    </h3>
+                    <div id="claim-count" class="bg-indigo-50 text-indigo-600 px-4 py-1 rounded-full font-bold text-sm">0 CLAIMS</div>
+                </div>
+                
+                <div id="claims-container" class="space-y-6">
+                    <!-- High-fidelity cards here -->
+                </div>
+            </div>
+
+            <!-- Detailed Synthesis -->
+            <div id="report-container" class="glass-card p-10 rounded-[2rem] border border-white shadow-xl">
+                <div class="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900">Executive Summary</h3>
+                </div>
+                <div id="report-content" class="prose prose-indigo max-w-none text-slate-600 leading-relaxed">
+                    <!-- Markdown -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

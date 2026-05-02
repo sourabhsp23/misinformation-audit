@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+@theme {
+  --color-brand-yellow: #FFD600;
+  --color-brand-red: #FF4B2B;
+  --color-brand-green: #00E676;
+  --color-brand-cyan: #00E5FF;
+  --color-brand-beige: #F4F1EA;
+}
+
+:root {
+  --brand-yellow: #FFD600;
+  --brand-red: #FF4B2B;
+  --brand-green: #00E676;
+  --brand-cyan: #00E5FF;
+  --brand-beige: #F4F1EA;
+}
+
+body {
+  background-color: var(--brand-beige);
+  color: #1a1a1a;
+  overflow-x: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 13px; /* Smaller base font */
+}
+
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+/* Micro-Brutalist Classes (Ultra-Crisp Scale) */
+.brutal-border {
+  border: 2px solid black;
+}
+
+.brutal-shadow {
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+}
+
+.brutal-shadow-sm {
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+}
+
+.brutal-card {
+  border: 2px solid black;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+  background-color: white;
+  padding: 1rem;
+  transition: all 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.brutal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+}
+
+.brutal-btn {
+  border: 2px solid black;
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+  padding: 0.4rem 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brutal-btn:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+}
+
+.brutal-input {
+  border: 2px solid black;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: white;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.brutal-input:focus {
+  outline: none;
+  background-color: white;
+  box-shadow: inset 0 0 0 1px var(--brand-cyan);
+}
+
+/* Animations */
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: rgba(0, 0, 0, 0.15);
+  animation: scan-line 2.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--brand-beige);
+}
+::-webkit-scrollbar-thumb {
+  background: black;
+  border: 1px solid var(--brand-beige);
+}
